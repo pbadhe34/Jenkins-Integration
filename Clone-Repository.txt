@@ -1,0 +1,5 @@
+Repository URL : https://github.com/pbadhe34/Jenkins-Integration.git
+
+ Clone the repository into new Directory
+
+ git clone https://github.com/pbadhe34/Jenkins-Integration.git MyApp
