@@ -1,0 +1,12 @@
+Eclipse GIT  SCM Plug-in
+
+Add eclipse-git-hub plugin connectors from the urls specified 
+
+
+
+Kepler : http://download.eclipse.org/egit/updates 
+
+
+Eclipse luna : http://download.eclipse.org/releases/luna 
+
+Eclipse Mars: http://download.eclipse.org/releases/mars 

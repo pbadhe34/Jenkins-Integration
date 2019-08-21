@@ -1,0 +1,12 @@
+
+
+  System Properties--User variables
+  JAVA_HOME 
+  D:\jdk1.8.0_144
+
+  PATH
+
+  D:\jdk1.8.0_144\bin;D:\apache-ant-1.9.3\bin;C:\Program Files\Git\bin;
+
+  From cmd line
+ set path=%path%;D:\jdk1.8.0_144\bin;C:\Program Files\Git\bin;D:\apache-ant-1.9.3\bin;

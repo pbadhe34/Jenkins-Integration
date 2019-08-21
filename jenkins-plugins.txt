@@ -1,0 +1,22 @@
+   Folders plugin
+   TimeStamper
+   Ant plugin
+   MSBuild plugin
+  CheckStyle plugin
+  Cobertura
+  HTML Publisher
+  Junit
+   Warnings
+   Pilelione
+    Pileline Stage view 
+   Build pipeline
+    Conditional build step
+  Parameterized trigger
+   Copy artifact   
+ Git plugin
+  Email extension
+  Email extension template
+   Mailer
+
+
+ 

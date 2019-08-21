@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.1" sequence="0" timestamp="1504543873885" analysisTimestamp="1504543873901" release="">
+  <Project projectName="">
+    <Jar>D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\bin</Jar>
+    <AuxClasspathEntry>D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\lib\junit-4.2.jar</AuxClasspathEntry>
+  </Project>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="1" rank="15" abbrev="DLS" category="STYLE" instanceHash="5bfcfd30987178d12e7f78d00593ab2c" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="563">
+    <ShortMessage>Dead store to local variable</ShortMessage>
+    <LongMessage>Dead store to $L1 in app.App.runMe(String)</LongMessage>
+    <Class classname="app.App" primary="true">
+      <SourceLine classname="app.App">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.App</Message>
+    </Class>
+    <Method classname="app.App" name="runMe" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="app.App" startBytecode="0" endBytecode="11"/>
+      <Message>In method app.App.runMe(String)</Message>
+    </Method>
+    <LocalVariable name="?" register="1" pc="13" role="LOCAL_VARIABLE_UNKNOWN">
+      <Message>Local variable stored in JVM register 1</Message>
+    </LocalVariable>
+    <SourceLine classname="app.App" startBytecode="12" endBytecode="12">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.BASE_VALUE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.DEAD_OBJECT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.IN_JSP_PAGE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.IS_PARAMETER" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="?"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.PARAM_DEAD_ON_ENTRY" value="true"/>
+  </BugInstance>
+  <BugInstance type="DM_STRING_CTOR" priority="2" rank="18" abbrev="Dm" category="PERFORMANCE" instanceHash="895e8a5a65f927901b073053a1d585ea" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method invokes inefficient new String(String) constructor</ShortMessage>
+    <LongMessage>app.App.runMe(String) invokes inefficient new String(String) constructor</LongMessage>
+    <Class classname="app.App" primary="true">
+      <SourceLine classname="app.App">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.App</Message>
+    </Class>
+    <Method classname="app.App" name="runMe" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="app.App"/>
+      <Message>In method app.App.runMe(String)</Message>
+    </Method>
+    <SourceLine classname="app.App" startBytecode="9" endBytecode="9">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN" priority="2" rank="8" abbrev="IP" category="CORRECTNESS" instanceHash="f9b1a93b92827af40f33327eaf493cbb" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="563">
+    <ShortMessage>A parameter is dead upon entry to a method but overwritten</ShortMessage>
+    <LongMessage>The parameter $L1 to app.App.runMe(String) is dead upon entry but overwritten</LongMessage>
+    <Class classname="app.App" primary="true">
+      <SourceLine classname="app.App">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.App</Message>
+    </Class>
+    <Method classname="app.App" name="runMe" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="app.App" startBytecode="0" endBytecode="11"/>
+      <Message>In method app.App.runMe(String)</Message>
+    </Method>
+    <LocalVariable name="?" register="1" pc="3" role="LOCAL_VARIABLE_UNKNOWN">
+      <Message>Local variable stored in JVM register 1</Message>
+    </LocalVariable>
+    <SourceLine classname="app.App" startBytecode="2" endBytecode="2">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_FIELD" priority="2" rank="18" abbrev="UrF" category="PERFORMANCE" instanceHash="31824ca9105ea00d7e4ac939631451d4" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Unread field</ShortMessage>
+    <LongMessage>Unread field: app.App2.unUsed</LongMessage>
+    <Class classname="app.App2" primary="true">
+      <SourceLine classname="app.App2">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.App2</Message>
+    </Class>
+    <Field classname="app.App2" name="unUsed" signature="I" isStatic="false" primary="true">
+      <SourceLine classname="app.App2">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>Field app.App2.unUsed</Message>
+    </Field>
+    <SourceLine classname="app.App2" startBytecode="7" endBytecode="7">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="SS_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SS" category="PERFORMANCE" instanceHash="3467eeb068f0be828a84258ef5d77915" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Unread field: should this field be static?</ShortMessage>
+    <LongMessage>Unread field: app.MyLogSink.data; should this field be static?</LongMessage>
+    <Class classname="app.MyLogSink" primary="true">
+      <SourceLine classname="app.MyLogSink">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.MyLogSink</Message>
+    </Class>
+    <Field classname="app.MyLogSink" name="data" signature="I" isStatic="false" primary="true">
+      <SourceLine classname="app.MyLogSink">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>Field app.MyLogSink.data</Message>
+    </Field>
+    <SourceLine classname="app.MyLogSink" startBytecode="7" endBytecode="7">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="1" rank="15" abbrev="DLS" category="STYLE" instanceHash="a61e7424ee8a89968b9aa945254de7e5" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="563">
+    <ShortMessage>Dead store to local variable</ShortMessage>
+    <LongMessage>Dead store to $L1 in app.UserInfo.runMe(String)</LongMessage>
+    <Class classname="app.UserInfo" primary="true">
+      <SourceLine classname="app.UserInfo">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.UserInfo</Message>
+    </Class>
+    <Method classname="app.UserInfo" name="runMe" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="app.UserInfo" startBytecode="0" endBytecode="11"/>
+      <Message>In method app.UserInfo.runMe(String)</Message>
+    </Method>
+    <LocalVariable name="?" register="1" pc="13" role="LOCAL_VARIABLE_UNKNOWN">
+      <Message>Local variable stored in JVM register 1</Message>
+    </LocalVariable>
+    <SourceLine classname="app.UserInfo" startBytecode="12" endBytecode="12">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.BASE_VALUE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.DEAD_OBJECT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.IN_JSP_PAGE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.IS_PARAMETER" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="?"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.PARAM_DEAD_ON_ENTRY" value="true"/>
+  </BugInstance>
+  <BugInstance type="DM_STRING_CTOR" priority="2" rank="18" abbrev="Dm" category="PERFORMANCE" instanceHash="66e5f42d745e6050c57533769b7d2689" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method invokes inefficient new String(String) constructor</ShortMessage>
+    <LongMessage>app.UserInfo.runMe(String) invokes inefficient new String(String) constructor</LongMessage>
+    <Class classname="app.UserInfo" primary="true">
+      <SourceLine classname="app.UserInfo">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.UserInfo</Message>
+    </Class>
+    <Method classname="app.UserInfo" name="runMe" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="app.UserInfo"/>
+      <Message>In method app.UserInfo.runMe(String)</Message>
+    </Method>
+    <SourceLine classname="app.UserInfo" startBytecode="9" endBytecode="9">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN" priority="2" rank="8" abbrev="IP" category="CORRECTNESS" instanceHash="6268a532452f4284dbdd83a4e4d78a2" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="563">
+    <ShortMessage>A parameter is dead upon entry to a method but overwritten</ShortMessage>
+    <LongMessage>The parameter $L1 to app.UserInfo.runMe(String) is dead upon entry but overwritten</LongMessage>
+    <Class classname="app.UserInfo" primary="true">
+      <SourceLine classname="app.UserInfo">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.UserInfo</Message>
+    </Class>
+    <Method classname="app.UserInfo" name="runMe" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="app.UserInfo" startBytecode="0" endBytecode="11"/>
+      <Message>In method app.UserInfo.runMe(String)</Message>
+    </Method>
+    <LocalVariable name="?" register="1" pc="3" role="LOCAL_VARIABLE_UNKNOWN">
+      <Message>Local variable stored in JVM register 1</Message>
+    </LocalVariable>
+    <SourceLine classname="app.UserInfo" startBytecode="2" endBytecode="2">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_FIELD" priority="2" rank="18" abbrev="UrF" category="PERFORMANCE" instanceHash="56652d54842f1df6eb58847c52dbf7e8" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Unread field</ShortMessage>
+    <LongMessage>Unread field: app.UserInfo.unUsed</LongMessage>
+    <Class classname="app.UserInfo" primary="true">
+      <SourceLine classname="app.UserInfo">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class app.UserInfo</Message>
+    </Class>
+    <Field classname="app.UserInfo" name="unUsed" signature="I" isStatic="false" primary="true">
+      <SourceLine classname="app.UserInfo">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>Field app.UserInfo.unUsed</Message>
+    </Field>
+    <SourceLine classname="app.UserInfo" startBytecode="7" endBytecode="7">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NP_ALWAYS_NULL" priority="1" rank="5" abbrev="NP" category="CORRECTNESS" instanceHash="38a83f0505e15c033d4efb23ac2236e4" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Null pointer dereference</ShortMessage>
+    <LongMessage>Null pointer dereference of ? in com.bank.Account.main(String[])</LongMessage>
+    <Class classname="com.bank.Account" primary="true">
+      <SourceLine classname="com.bank.Account">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.bank.Account</Message>
+    </Class>
+    <Method classname="com.bank.Account" name="main" signature="([Ljava/lang/String;)V" isStatic="true" primary="true">
+      <SourceLine classname="com.bank.Account"/>
+      <Message>In method com.bank.Account.main(String[])</Message>
+    </Method>
+    <LocalVariable name="?" register="1" pc="13" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from ?</Message>
+    </LocalVariable>
+    <SourceLine classname="com.bank.Account" startBytecode="14" endBytecode="14" role="SOURCE_LINE_DEREF">
+      <Message>Dereferenced at &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RV_RETURN_VALUE_IGNORED" priority="1" rank="3" abbrev="RV" category="CORRECTNESS" instanceHash="390777734a4f39c6cb55a598c4485dba" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Method ignores return value</ShortMessage>
+    <LongMessage>Return value of String.concat(String) ignored in new com.bank.Account(String)</LongMessage>
+    <Class classname="com.bank.Account" primary="true">
+      <SourceLine classname="com.bank.Account">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.bank.Account</Message>
+    </Class>
+    <Method classname="com.bank.Account" name="&lt;init&gt;" signature="(Ljava/lang/String;)V" isStatic="false" primary="true">
+      <SourceLine classname="com.bank.Account"/>
+      <Message>In method new com.bank.Account(String)</Message>
+    </Method>
+    <Method classname="java.lang.String" name="concat" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.lang.String" start="2027" end="2034" startBytecode="0" endBytecode="106" sourcefile="String.java" sourcepath="java/lang/String.java"/>
+      <Message>Called method String.concat(String)</Message>
+    </Method>
+    <SourceLine classname="com.bank.Account" startBytecode="9" endBytecode="9">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RV_RETURN_VALUE_IGNORED" priority="1" rank="3" abbrev="RV" category="CORRECTNESS" instanceHash="74cfa977c38fdede6113c7bb4e14c0d8" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Method ignores return value</ShortMessage>
+    <LongMessage>Return value of String.replace(CharSequence, CharSequence) ignored in com.bank.Account.replaceName(String)</LongMessage>
+    <Class classname="com.bank.Account" primary="true">
+      <SourceLine classname="com.bank.Account">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.bank.Account</Message>
+    </Class>
+    <Method classname="com.bank.Account" name="replaceName" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="com.bank.Account"/>
+      <Message>In method com.bank.Account.replaceName(String)</Message>
+    </Method>
+    <Method classname="java.lang.String" name="replace" signature="(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.lang.String" start="2239" end="2239" startBytecode="0" endBytecode="59" sourcefile="String.java" sourcepath="java/lang/String.java"/>
+      <Message>Called method String.replace(CharSequence, CharSequence)</Message>
+    </Method>
+    <SourceLine classname="com.bank.Account" startBytecode="9" endBytecode="9">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UR_UNINIT_READ" priority="2" rank="3" abbrev="UR" category="CORRECTNESS" instanceHash="dad363f7ffb8919c21d45f93a19892bc" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Uninitialized read of field in constructor</ShortMessage>
+    <LongMessage>Uninitialized read of name in new com.bank.Account(String)</LongMessage>
+    <Class classname="com.bank.Account" primary="true">
+      <SourceLine classname="com.bank.Account">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.bank.Account</Message>
+    </Class>
+    <Method classname="com.bank.Account" name="&lt;init&gt;" signature="(Ljava/lang/String;)V" isStatic="false" primary="true">
+      <SourceLine classname="com.bank.Account"/>
+      <Message>In method new com.bank.Account(String)</Message>
+    </Method>
+    <Field classname="com.bank.Account" name="name" signature="Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="com.bank.Account">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>Field com.bank.Account.name</Message>
+    </Field>
+    <SourceLine classname="com.bank.Account" startBytecode="5" endBytecode="5">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" rank="18" abbrev="UuF" category="PERFORMANCE" instanceHash="71cc185074376825232bf442ba252368" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Unused field</ShortMessage>
+    <LongMessage>Unused field: com.bank.Account.branchName</LongMessage>
+    <Class classname="com.bank.Account" primary="true">
+      <SourceLine classname="com.bank.Account">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.bank.Account</Message>
+    </Class>
+    <Field classname="com.bank.Account" name="branchName" signature="Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="com.bank.Account">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>Field com.bank.Account.branchName</Message>
+    </Field>
+    <SourceLine classname="com.bank.Account" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RV_RETURN_VALUE_IGNORED" priority="1" rank="3" abbrev="RV" category="CORRECTNESS" instanceHash="4715ffa3e8eedb46ca840e27883ab02" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Method ignores return value</ShortMessage>
+    <LongMessage>Return value of String.substring(int) ignored in com.company.HelloWorld.getSearchString(String)</LongMessage>
+    <Class classname="com.company.HelloWorld" primary="true">
+      <SourceLine classname="com.company.HelloWorld">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.company.HelloWorld</Message>
+    </Class>
+    <Method classname="com.company.HelloWorld" name="getSearchString" signature="(Ljava/lang/String;)Ljava/lang/String;" isStatic="false" primary="true">
+      <SourceLine classname="com.company.HelloWorld"/>
+      <Message>In method com.company.HelloWorld.getSearchString(String)</Message>
+    </Method>
+    <Method classname="java.lang.String" name="substring" signature="(I)Ljava/lang/String;" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.lang.String" start="1926" end="1933" startBytecode="0" endBytecode="117" sourcefile="String.java" sourcepath="java/lang/String.java"/>
+      <Message>Called method String.substring(int)</Message>
+    </Method>
+    <SourceLine classname="com.company.HelloWorld" startBytecode="10" endBytecode="10">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RV_RETURN_VALUE_IGNORED" priority="1" rank="3" abbrev="RV" category="CORRECTNESS" instanceHash="7f047dd43f77ac0f4bc0165a87be8f29" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Method ignores return value</ShortMessage>
+    <LongMessage>Return value of String.substring(int) ignored in com.company.HelloWorld.testNewCode()</LongMessage>
+    <Class classname="com.company.HelloWorld" primary="true">
+      <SourceLine classname="com.company.HelloWorld">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.company.HelloWorld</Message>
+    </Class>
+    <Method classname="com.company.HelloWorld" name="testNewCode" signature="()V" isStatic="false" primary="true">
+      <SourceLine classname="com.company.HelloWorld"/>
+      <Message>In method com.company.HelloWorld.testNewCode()</Message>
+    </Method>
+    <Method classname="java.lang.String" name="substring" signature="(I)Ljava/lang/String;" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.lang.String" start="1926" end="1933" startBytecode="0" endBytecode="117" sourcefile="String.java" sourcepath="java/lang/String.java"/>
+      <Message>Called method String.substring(int)</Message>
+    </Method>
+    <SourceLine classname="com.company.HelloWorld" startBytecode="13" endBytecode="13">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" priority="2" rank="17" abbrev="RV" category="STYLE" instanceHash="d772a776df04fed05197af69eb313286" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Return value of method without side effect is ignored</ShortMessage>
+    <LongMessage>Return value of sayHello() ignored, but method has no side effect</LongMessage>
+    <Class classname="com.company.HelloWorld" primary="true">
+      <SourceLine classname="com.company.HelloWorld">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.company.HelloWorld</Message>
+    </Class>
+    <Method classname="com.company.HelloWorld" name="main" signature="([Ljava/lang/String;)V" isStatic="true" primary="true">
+      <SourceLine classname="com.company.HelloWorld"/>
+      <Message>In method com.company.HelloWorld.main(String[])</Message>
+    </Method>
+    <Method classname="com.company.HelloWorld" name="sayHello" signature="()Ljava/lang/String;" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="com.company.HelloWorld"/>
+      <Message>Called method com.company.HelloWorld.sayHello()</Message>
+    </Method>
+    <SourceLine classname="com.company.HelloWorld" startBytecode="9" endBytecode="9">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" rank="18" abbrev="UuF" category="PERFORMANCE" instanceHash="73d29e202ca7e5622adacb6ff281de5c" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Unused field</ShortMessage>
+    <LongMessage>Unused field: com.company.HelloWorld.num</LongMessage>
+    <Class classname="com.company.HelloWorld" primary="true">
+      <SourceLine classname="com.company.HelloWorld">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class com.company.HelloWorld</Message>
+    </Class>
+    <Field classname="com.company.HelloWorld" name="num" signature="I" isStatic="false" primary="true">
+      <SourceLine classname="com.company.HelloWorld">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>Field com.company.HelloWorld.num</Message>
+    </Field>
+    <SourceLine classname="com.company.HelloWorld" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_METHOD_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="901f709ec55888b4605e88ad9bf16040" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method names should start with a lower case letter</ShortMessage>
+    <LongMessage>The method name test.com.bank.App1Test.TestappCheck() doesn&apos;t start with a lower case letter</LongMessage>
+    <Class classname="test.com.bank.App1Test" primary="true">
+      <SourceLine classname="test.com.bank.App1Test">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class test.com.bank.App1Test</Message>
+    </Class>
+    <Method classname="test.com.bank.App1Test" name="TestappCheck" signature="()V" isStatic="false" primary="true">
+      <SourceLine classname="test.com.bank.App1Test"/>
+      <Message>In method test.com.bank.App1Test.TestappCheck()</Message>
+    </Method>
+    <SourceLine classname="test.com.bank.App1Test" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugCategory category="BAD_PRACTICE">
+    <Description>Bad practice</Description>
+  </BugCategory>
+  <BugCategory category="PERFORMANCE">
+    <Description>Performance</Description>
+  </BugCategory>
+  <BugCategory category="CORRECTNESS">
+    <Description>Correctness</Description>
+  </BugCategory>
+  <BugCategory category="STYLE">
+    <Description>Dodgy code</Description>
+  </BugCategory>
+  <BugPattern type="DLS_DEAD_LOCAL_STORE" abbrev="DLS" category="STYLE">
+    <ShortDescription>Dead store to local variable</ShortDescription>
+    <Details><![CDATA[
+
+<p>
+This instruction assigns a value to a local variable,
+but the value is not read or used in any subsequent instruction.
+Often, this indicates an error, because the value computed is never
+used.
+</p>
+<p>
+Note that Sun's javac compiler often generates dead stores for
+final local variables.  Because FindBugs is a bytecode-based tool,
+there is no easy way to eliminate these false positives.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="NP_ALWAYS_NULL" abbrev="NP" category="CORRECTNESS">
+    <ShortDescription>Null pointer dereference</ShortDescription>
+    <Details><![CDATA[
+
+<p> A null pointer is dereferenced here.&nbsp; This will lead to a
+<code>NullPointerException</code> when the code is executed.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="RV_RETURN_VALUE_IGNORED" abbrev="RV" category="CORRECTNESS">
+    <ShortDescription>Method ignores return value</ShortDescription>
+    <Details><![CDATA[
+
+   <p> The return value of this method should be checked. One common
+cause of this warning is to invoke a method on an immutable object,
+thinking that it updates the object. For example, in the following code
+fragment,</p>
+<blockquote>
+<pre>
+String dateString = getHeaderField(name);
+dateString.trim();
+</pre>
+</blockquote>
+<p>the programmer seems to be thinking that the trim() method will update
+the String referenced by dateString. But since Strings are immutable, the trim()
+function returns a new String value, which is being ignored here. The code
+should be corrected to: </p>
+<blockquote>
+<pre>
+String dateString = getHeaderField(name);
+dateString = dateString.trim();
+</pre>
+</blockquote>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" abbrev="RV" category="STYLE">
+    <ShortDescription>Return value of method without side effect is ignored</ShortDescription>
+    <Details><![CDATA[
+
+<p>This code calls a method and ignores the return value. However our analysis shows that
+the method (including its implementations in subclasses if any) does not produce any effect 
+other than return value. Thus this call can be removed.
+</p>
+<p>We are trying to reduce the false positives as much as possible, but in some cases this warning might be wrong.
+Common false-positive cases include:</p>
+<p>- The method is designed to be overridden and produce a side effect in other projects which are out of the scope of the analysis.</p>
+<p>- The method is called to trigger the class loading which may have a side effect.</p>
+<p>- The method is called just to get some exception.</p>
+<p>If you feel that our assumption is incorrect, you can use a @CheckReturnValue annotation
+to instruct FindBugs that ignoring the return value of this method is acceptable.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="UUF_UNUSED_FIELD" abbrev="UuF" category="PERFORMANCE">
+    <ShortDescription>Unused field</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This field is never used.&nbsp; Consider removing it from the class.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="SS_SHOULD_BE_STATIC" abbrev="SS" category="PERFORMANCE">
+    <ShortDescription>Unread field: should this field be static?</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This class contains an instance final field that
+   is initialized to a compile-time static value.
+   Consider making the field static.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN" abbrev="IP" category="CORRECTNESS" cweid="563">
+    <ShortDescription>A parameter is dead upon entry to a method but overwritten</ShortDescription>
+    <Details><![CDATA[
+
+<p>
+The initial value of this parameter is ignored, and the parameter
+is overwritten here. This often indicates a mistaken belief that
+the write to the parameter will be conveyed back to
+the caller.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="NM_METHOD_NAMING_CONVENTION" abbrev="Nm" category="BAD_PRACTICE">
+    <ShortDescription>Method names should start with a lower case letter</ShortDescription>
+    <Details><![CDATA[
+
+  <p>
+Methods should be verbs, in mixed case with the first letter lowercase, with the first letter of each internal word capitalized.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="URF_UNREAD_FIELD" abbrev="UrF" category="PERFORMANCE">
+    <ShortDescription>Unread field</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This field is never read.&nbsp; Consider removing it from the class.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="DM_STRING_CTOR" abbrev="Dm" category="PERFORMANCE">
+    <ShortDescription>Method invokes inefficient new String(String) constructor</ShortDescription>
+    <Details><![CDATA[
+
+  <p> Using the <code>java.lang.String(String)</code> constructor wastes memory
+  because the object so constructed will be functionally indistinguishable
+  from the <code>String</code> passed as a parameter.&nbsp; Just use the
+  argument <code>String</code> directly.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="UR_UNINIT_READ" abbrev="UR" category="CORRECTNESS">
+    <ShortDescription>Uninitialized read of field in constructor</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This constructor reads a field which has not yet been assigned a value.&nbsp;
+  This is often caused when the programmer mistakenly uses the field instead
+  of one of the constructor's parameters.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugCode abbrev="SS">
+    <Description>Unread field should be static</Description>
+  </BugCode>
+  <BugCode abbrev="NP" cweid="476">
+    <Description>Null pointer dereference</Description>
+  </BugCode>
+  <BugCode abbrev="RV" cweid="440">
+    <Description>Bad use of return value from method</Description>
+  </BugCode>
+  <BugCode abbrev="IP">
+    <Description>Ignored parameter</Description>
+  </BugCode>
+  <BugCode abbrev="UuF">
+    <Description>Unused field</Description>
+  </BugCode>
+  <BugCode abbrev="UrF">
+    <Description>Unread field</Description>
+  </BugCode>
+  <BugCode abbrev="Dm">
+    <Description>Dubious method used</Description>
+  </BugCode>
+  <BugCode abbrev="DLS" cweid="563">
+    <Description>Dead local store</Description>
+  </BugCode>
+  <BugCode abbrev="UR">
+    <Description>Uninitialized read of field in constructor</Description>
+  </BugCode>
+  <BugCode abbrev="Nm">
+    <Description>Confusing method name</Description>
+  </BugCode>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Mon, 4 Sep 2017 22:21:13 +0530" total_classes="19" referenced_classes="86" total_bugs="19" total_size="234" num_packages="4" java_version="1.8.0_144" vm_version="25.144-b01" cpu_seconds="13.14" clock_seconds="3.77" peak_mbytes="120.54" alloc_mbytes="880.00" gc_seconds="0.18" priority_2="12" priority_1="7">
+    <FileStats path="app/&lt;Unknown&gt;" bugCount="9" size="83" bugHash="f05df2d8a5aff0a6eb6e82085fcf85b4"/>
+    <FileStats path="com/bank/&lt;Unknown&gt;" bugCount="5" size="59" bugHash="12bdd5fe292ec395d9f0bfb2bfabf714"/>
+    <FileStats path="com/company/&lt;Unknown&gt;" bugCount="4" size="14" bugHash="c122d2d3a1abe902dfa87d039c8f6b5d"/>
+    <FileStats path="test/com/bank/&lt;Unknown&gt;" bugCount="1" size="78" bugHash="dd2ec04adbff2365ace67875cd694601"/>
+    <PackageStats package="app" total_bugs="9" total_types="7" total_size="83" priority_2="7" priority_1="2">
+      <ClassStats class="app.App" sourceFile="&lt;Unknown&gt;" interface="false" size="24" bugs="3" priority_2="2" priority_1="1"/>
+      <ClassStats class="app.App2" sourceFile="&lt;Unknown&gt;" interface="false" size="11" bugs="1" priority_2="1"/>
+      <ClassStats class="app.ArtifactLocation" sourceFile="&lt;Unknown&gt;" interface="false" size="4" bugs="0"/>
+      <ClassStats class="app.InclusionException" sourceFile="&lt;Unknown&gt;" interface="false" size="4" bugs="0"/>
+      <ClassStats class="app.MyLogSink" sourceFile="&lt;Unknown&gt;" interface="false" size="20" bugs="1" priority_2="1"/>
+      <ClassStats class="app.SourceMap" sourceFile="&lt;Unknown&gt;" interface="true" size="2" bugs="0"/>
+      <ClassStats class="app.UserInfo" sourceFile="&lt;Unknown&gt;" interface="false" size="18" bugs="4" priority_2="3" priority_1="1"/>
+    </PackageStats>
+    <PackageStats package="com.bank" total_bugs="5" total_types="3" total_size="59" priority_2="2" priority_1="3">
+      <ClassStats class="com.bank.Account" sourceFile="&lt;Unknown&gt;" interface="false" size="38" bugs="5" priority_2="2" priority_1="3"/>
+      <ClassStats class="com.bank.AccountTestClass" sourceFile="&lt;Unknown&gt;" interface="false" size="17" bugs="0"/>
+      <ClassStats class="com.bank.Manager" sourceFile="&lt;Unknown&gt;" interface="false" size="4" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="com.company" total_bugs="4" total_types="1" total_size="14" priority_2="2" priority_1="2">
+      <ClassStats class="com.company.HelloWorld" sourceFile="&lt;Unknown&gt;" interface="false" size="14" bugs="4" priority_2="2" priority_1="2"/>
+    </PackageStats>
+    <PackageStats package="test.com.bank" total_bugs="1" total_types="8" total_size="78" priority_2="1">
+      <ClassStats class="test.com.bank.AccountTest" sourceFile="&lt;Unknown&gt;" interface="false" size="17" bugs="0"/>
+      <ClassStats class="test.com.bank.AllJUnitTest" sourceFile="&lt;Unknown&gt;" interface="false" size="8" bugs="0"/>
+      <ClassStats class="test.com.bank.App1Test" sourceFile="&lt;Unknown&gt;" interface="false" size="6" bugs="1" priority_2="1"/>
+      <ClassStats class="test.com.bank.AppTest" sourceFile="&lt;Unknown&gt;" interface="false" size="14" bugs="0"/>
+      <ClassStats class="test.com.bank.HelloWorldTest" sourceFile="&lt;Unknown&gt;" interface="false" size="16" bugs="0"/>
+      <ClassStats class="test.com.bank.Junit4SuiteTest" sourceFile="&lt;Unknown&gt;" interface="false" size="2" bugs="0"/>
+      <ClassStats class="test.com.bank.ManagerTest" sourceFile="&lt;Unknown&gt;" interface="false" size="7" bugs="0"/>
+      <ClassStats class="test.com.bank.SkeletonTest" sourceFile="&lt;Unknown&gt;" interface="false" size="8" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="533" invocations="566" avgMicrosecondsPerInvocation="943" maxMicrosecondsPerInvocation="43153" standardDeviationMircosecondsPerInvocation="2650"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="300" invocations="570" avgMicrosecondsPerInvocation="526" maxMicrosecondsPerInvocation="2106" standardDeviationMircosecondsPerInvocation="249"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="235" invocations="86" avgMicrosecondsPerInvocation="2738" maxMicrosecondsPerInvocation="24557" standardDeviationMircosecondsPerInvocation="4922"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="198" invocations="527" avgMicrosecondsPerInvocation="375" maxMicrosecondsPerInvocation="123425" standardDeviationMircosecondsPerInvocation="5374"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="168" invocations="86" avgMicrosecondsPerInvocation="1959" maxMicrosecondsPerInvocation="24697" standardDeviationMircosecondsPerInvocation="4024"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="146" invocations="242" avgMicrosecondsPerInvocation="606" maxMicrosecondsPerInvocation="8278" standardDeviationMircosecondsPerInvocation="1072"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="72" invocations="91" avgMicrosecondsPerInvocation="794" maxMicrosecondsPerInvocation="58889" standardDeviationMircosecondsPerInvocation="6125"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="71" invocations="86" avgMicrosecondsPerInvocation="834" maxMicrosecondsPerInvocation="17113" standardDeviationMircosecondsPerInvocation="2044"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="70" invocations="121" avgMicrosecondsPerInvocation="579" maxMicrosecondsPerInvocation="27910" standardDeviationMircosecondsPerInvocation="2588"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="66" invocations="90" avgMicrosecondsPerInvocation="735" maxMicrosecondsPerInvocation="16427" standardDeviationMircosecondsPerInvocation="1775"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="58" invocations="90" avgMicrosecondsPerInvocation="647" maxMicrosecondsPerInvocation="19280" standardDeviationMircosecondsPerInvocation="2003"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="57" invocations="91" avgMicrosecondsPerInvocation="630" maxMicrosecondsPerInvocation="18886" standardDeviationMircosecondsPerInvocation="1995"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="55" invocations="86" avgMicrosecondsPerInvocation="640" maxMicrosecondsPerInvocation="9240" standardDeviationMircosecondsPerInvocation="1373"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="54" invocations="91" avgMicrosecondsPerInvocation="595" maxMicrosecondsPerInvocation="15611" standardDeviationMircosecondsPerInvocation="1670"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="53" invocations="86" avgMicrosecondsPerInvocation="623" maxMicrosecondsPerInvocation="16767" standardDeviationMircosecondsPerInvocation="1876"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="50" invocations="90" avgMicrosecondsPerInvocation="558" maxMicrosecondsPerInvocation="3898" standardDeviationMircosecondsPerInvocation="667"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildStringPassthruGraph" totalMilliseconds="46" invocations="86" avgMicrosecondsPerInvocation="537" maxMicrosecondsPerInvocation="13155" standardDeviationMircosecondsPerInvocation="1526"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="43" invocations="86" avgMicrosecondsPerInvocation="506" maxMicrosecondsPerInvocation="8334" standardDeviationMircosecondsPerInvocation="1071"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="42" invocations="90" avgMicrosecondsPerInvocation="471" maxMicrosecondsPerInvocation="5169" standardDeviationMircosecondsPerInvocation="727"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

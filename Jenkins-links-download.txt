@@ -1,0 +1,27 @@
+JDK 1.8 from Oracle web site
+
+The Apache Ant 1.9.zip
+http://www-eu.apache.org/dist//ant/binaries/apache-ant-1.9.9-bin.zip
+
+
+Apache maven 3.5.zip
+http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip
+
+Eclipse-JEE-Mars-win64.zip
+http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/mars/2/eclipse-jee-mars-2-win32-x86_64.zip
+
+Jenkins2.65.war
+https://updates.jenkins-ci.org/download/war/2.65/jenkins.war 
+
+
+GIT SCM Repository
+
+https://github.com/git-for-windows/git/releases/download/v2.14.1.windows.1/Git-2.14.1-64-bit.exe
+
+SonarQube
+
+https://akamai.bintray.com/1f/1f66bbed4e4b2d974211d980cb52bb9cc2f3b1277eeee33bd98fd0a94f61caa4?__gda__=exp=1504174412~hmac=181c04c613b75b59589c7200bac152ac615361780e424785c936e2f0a5c3f2cc&response-content-disposition=attachment%3Bfilename%3D%22sonarqube-6.5.zip%22&response-content-type=application%2Fzip&requestInfo=U2FsdGVkX19brzndTqT1zDOIzpGMnqTvpVbBy-oayy6zlv0ur_akyKg3QazGGJs3-v_GOUKt8iXdR8L9DHPSF5p-jd_hFp7mfId_QqVHEKof-SgKapOxQ4NQtI8u-Pey12KATakE7NqZztvRZOywHTV452k2VuiuFx9HMcipZ76gq1ixXHhUFdjBNKel4EfG
+
+Sonar-Scanner
+ 
+https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.0.3.778-windows.zip

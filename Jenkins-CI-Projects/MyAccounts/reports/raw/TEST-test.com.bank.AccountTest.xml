@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Prakash-PC" name="test.com.bank.AccountTest" skipped="0" tests="2" time="0.073" timestamp="2017-09-04T16:51:08">
+  <properties>
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sonar.projectName" value="Sonar Code Analyzer" />
+    <property name="sonar.java.binaries" value="bin" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="checkstyle.home.dir" value="D:\checkstyle-5.5" />
+    <property name="ant.file.type.Simple Java Project analyzed with the Sonar Ant Task" value="file" />
+    <property name="os.name" value="Windows 7" />
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_144\jre\classes" />
+    <property name="sun.desktop" value="windows" />
+    <property name="ant.file.type.Test_Project_Junit" value="file" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="ant.home" value="D:\apache-ant-1.9.9\bin\.." />
+    <property name="sonar.projectVersion" value="1.0" />
+    <property name="java.runtime.version" value="1.8.0_144-b01" />
+    <property name="user.name" value="Prakash" />
+    <property name="ant.file.SourceCode-Analyse" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\build-analyze.xml" />
+    <property name="ant.file.Ant-Import-Files" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\Ant-import-Files.xml" />
+    <property name="reports" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports" />
+    <property name="build.dir" value="bin" />
+    <property name="user.language" value="en" />
+    <property name="build" value="build" />
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\bin" />
+    <property name="ant.project.default-target" value="BatchTest" />
+    <property name="report.findbugs.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports\findbugs" />
+    <property name="ant.project.name" value="Test_Project_Junit" />
+    <property name="java.version" value="1.8.0_144" />
+    <property name="user.timezone" value="" />
+    <property name="sun.arch.data.model" value="64" />
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_144\jre\lib\endorsed" />
+    <property name="sun.cpu.isalist" value="amd64" />
+    <property name="sun.jnu.encoding" value="Cp1252" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="file.separator" value="\" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="sonar.sources" value="src" />
+    <property name="antversion" value="1.9.9" />
+    <property name="classes.dir" value="bin" />
+    <property name="java.class.version" value="52.0" />
+    <property name="pmd.home.dir" value="D:/pmd-bin-5.1.0" />
+    <property name="user.country" value="US" />
+    <property name="ant.file.type.SourceCode-Analyse" value="file" />
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_144\jre" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="ant.file" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\build.xml" />
+    <property name="os.version" value="6.1" />
+    <property name="htm.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\html" />
+    <property name="path.separator" value=";" />
+    <property name="ant.file.type.Ant-Import-Files" value="file" />
+    <property name="java.vm.version" value="25.144-b01" />
+    <property name="user.variant" value="" />
+    <property name="ant.library.dir" value="D:\apache-ant-1.9.9\lib" />
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
+    <property name="report.temp.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports\temp" />
+    <property name="sun.stdout.encoding" value="cp437" />
+    <property name="user.script" value="" />
+    <property name="sonar.exclusions" value="src/test/**" />
+    <property name="user.home" value="C:\Users\Prakash" />
+    <property name="sonar.binaries" value="bin" />
+    <property name="sonar.language" value="java" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\MSBuild\14.0\Bin;C:\Program Files\Java\jdk1.8.0_144\bin;C:\Program Files\Git\bin;D:\apache-ant-1.9.9\bin;D:\nant-0.92\bin;C:\Windows\System32;;." />
+    <property name="java.vendor.url" value="http://java.oracle.com/" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner test.com.bank.AccountTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.SummaryJUnitResultFormatter showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports\raw\TEST-test.com.bank.AccountTest.xml crashfile=D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\junitvmwatcher6098245698882366703.properties propsfile=D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\junit4347139755841326881.properties" />
+    <property name="java.class.path" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\bin;D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\lib\junit-4.2.jar;D:\apache-ant-1.9.9\lib\ant-launcher.jar;D:\apache-ant-1.9.9\lib\ant-antlr.jar;D:\apache-ant-1.9.9\lib\ant-apache-bcel.jar;D:\apache-ant-1.9.9\lib\ant-apache-bsf.jar;D:\apache-ant-1.9.9\lib\ant-apache-log4j.jar;D:\apache-ant-1.9.9\lib\ant-apache-oro.jar;D:\apache-ant-1.9.9\lib\ant-apache-regexp.jar;D:\apache-ant-1.9.9\lib\ant-apache-resolver.jar;D:\apache-ant-1.9.9\lib\ant-apache-xalan2.jar;D:\apache-ant-1.9.9\lib\ant-commons-logging.jar;D:\apache-ant-1.9.9\lib\ant-commons-net.jar;D:\apache-ant-1.9.9\lib\ant-dotnet-1.1.jar;D:\apache-ant-1.9.9\lib\ant-jai.jar;D:\apache-ant-1.9.9\lib\ant-javamail.jar;D:\apache-ant-1.9.9\lib\ant-jdepend.jar;D:\apache-ant-1.9.9\lib\ant-jmf.jar;D:\apache-ant-1.9.9\lib\ant-jsch.jar;D:\apache-ant-1.9.9\lib\ant-junit.jar;D:\apache-ant-1.9.9\lib\ant-junit4.jar;D:\apache-ant-1.9.9\lib\ant-netrexx.jar;D:\apache-ant-1.9.9\lib\ant-swing.jar;D:\apache-ant-1.9.9\lib\ant-testutil.jar;D:\apache-ant-1.9.9\lib\ant.jar;D:\apache-ant-1.9.9\lib\catalina-ant.jar;C:\Program Files\Java\jdk1.8.0_144\lib\tools.jar" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.9.9 compiled on February 2 2017" />
+    <property name="report.junit.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports\junit" />
+    <property name="app.name" value="test" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="ant.file.type" value="file" />
+    <property name="java.vm.specification.version" value="1.8" />
+    <property name="sonar.sourceEncoding" value="UTF-8" />
+    <property name="sun.os.patch.level" value="Service Pack 1" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="java.io.tmpdir" value="C:\Users\Prakash\AppData\Local\Temp\" />
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+    <property name="instrumented.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\instrumented" />
+    <property name="os.arch" value="amd64" />
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment" />
+    <property name="findbugs.home.dir" value="D:/findbugs-3.0.1/findbugs-3.0.1" />
+    <property name="cobertura.ser.file" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\cobertura.ser" />
+    <property name="ant.file.Simple Java Project analyzed with the Sonar Ant Task" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\Sonar-Analyze.xml" />
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext;C:\Windows\Sun\Java\lib\ext" />
+    <property name="user.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts" />
+    <property name="line.separator" value="&#xd;&#xa;" />
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+    <property name="cobertura.home.dir" value="D:/cobertura-2.1.1" />
+    <property name="basedir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts" />
+    <property name="ant.file.Test_Project_Junit" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\build.xml" />
+    <property name="report.pmd.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports\pmd" />
+    <property name="ant.java.version" value="1.8" />
+    <property name="report.cobertura.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports\cobertura" />
+    <property name="ant.core.lib" value="D:\apache-ant-1.9.9\lib\ant.jar" />
+    <property name="file.encoding" value="Cp1252" />
+    <property name="sun.stderr.encoding" value="cp437" />
+    <property name="source.dir" value="src" />
+    <property name="report.checkstyle.dir" value="D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\reports\checkstyle" />
+    <property name="java.specification.version" value="1.8" />
+    <property name="src.dir" value="src" />
+    <property name="ant.project.invoked-targets" value="BatchTest" />
+    <property name="sonar.projectKey" value="org.sonarqube:java-ant" />
+  </properties>
+  <testcase classname="test.com.bank.AccountTest" name="testGetAccount_no" time="0.001" />
+  <testcase classname="test.com.bank.AccountTest" name="testAccountEquals" time="0.0" />
+  <system-out><![CDATA[implemented in accountTest
+Account.Account() heer
+Account.getAccount_no()
+Account.Account() heer
+Account.Account() heer
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

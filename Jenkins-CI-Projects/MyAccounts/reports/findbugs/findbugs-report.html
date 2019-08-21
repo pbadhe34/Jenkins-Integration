@@ -1,0 +1,1472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>
+        FindBugs (3.0.1)
+         Analysis for
+         </title>
+<script type="text/javascript">
+         function show(foo) {
+            document.getElementById(foo).style.display="block";
+         }
+         function hide(foo) {
+            document.getElementById(foo).style.display="none";
+         }
+         function toggle(foo) {
+            if( document.getElementById(foo).style.display == "none") {
+               show(foo);
+            } else {
+               if( document.getElementById(foo).style.display == "block") {
+                  hide(foo);
+               } else {
+                  show(foo);
+               }
+            }
+         }
+
+         function showmenu(foo) {
+            if( document.getElementById(foo).style.display == "none") {
+               hide("bug-summary");
+               document.getElementById("bug-summary-tab").className="menu-tab";
+               hide("analysis-data");
+               document.getElementById("analysis-data-tab").className="menu-tab";
+               //hide("list-by-b-t");
+               //document.getElementById("list-by-b-t-tab").className="menu-tab";
+               hide("list-by-package");
+               document.getElementById("list-by-package-tab").className="menu-tab";
+               hide("list-by-category");
+               document.getElementById("list-by-category-tab").className="menu-tab";
+               document.getElementById(foo+"-tab").className="menu-tab-selected";
+               show(foo);
+
+            }
+            // else menu already selected!
+         }
+         function showbug(buguid, list) {
+            var bugplaceholder   = document.getElementById(buguid+'-ph-'+list);
+            var bug              = document.getElementById(buguid);
+
+            if ( bugplaceholder==null) {
+               alert(buguid+'-ph-'+list+' - '+buguid+' - bugplaceholder==null');
+               return;
+            }
+            if ( bug==null) {
+               alert(buguid+'-ph-'+list+' - '+buguid+' - bug==null');
+               return;
+            }
+
+            var oldBug = bugplaceholder.innerHTML;
+            var newBug = bug.innerHTML;
+            //alert(oldBug);
+            //alert(newBug);
+            toggle(buguid+'-ph-'+list);
+            bugplaceholder.innerHTML = newBug;
+         }
+      </script>
+<script type="text/javascript">
+     /*  */
+         // Extended Tooltip Javascript
+         // copyright 9th August 2002, 3rd July 2005
+         // by Stephen Chapman, Felgall Pty Ltd
+
+         // permission is granted to use this javascript provided that the below code is not altered
+         var DH = 0;var an = 0;var al = 0;var ai = 0;if (document.getElementById) {ai = 1; DH = 1;}else {if (document.all) {al = 1; DH = 1;} else { browserVersion = parseInt(navigator.appVersion); if (navigator.appName.indexOf('Netscape') != -1) if (browserVersion == 4) {an = 1; DH = 1;}}}
+         function fd(oi, wS) {if (ai) return wS ? document.getElementById(oi).style:document.getElementById(oi); if (al) return wS ? document.all[oi].style: document.all[oi]; if (an) return document.layers[oi];}
+         function pw() {return window.innerWidth != null? window.innerWidth: document.body.clientWidth != null? document.body.clientWidth:null;}
+         function mouseX(evt) {if (evt.pageX) return evt.pageX; else if (evt.clientX)return evt.clientX + (document.documentElement.scrollLeft ?  document.documentElement.scrollLeft : document.body.scrollLeft); else return null;}
+         function mouseY(evt) {if (evt.pageY) return evt.pageY; else if (evt.clientY)return evt.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop); else return null;}
+         function popUp(evt,oi) {if (DH) {var wp = pw(); ds = fd(oi,1); dm = fd(oi,0); st = ds.visibility; if (dm.offsetWidth) ew = dm.offsetWidth; else if (dm.clip.width) ew = dm.clip.width; if (st == "visible" || st == "show") { ds.visibility = "hidden"; } else {tv = mouseY(evt) + 20; lv = mouseX(evt) - (ew/4); if (lv < 2) lv = 2; else if (lv + ew > wp) lv -= ew/2; if (!an) {lv += 'px';tv += 'px';} ds.left = lv; ds.top = tv; ds.visibility = "visible";}}}
+  /*  */
+</script>
+<style type="text/css">
+         html, body {
+            background-color: #ffffff;
+         }
+         a, a:link , a:active, a:visited, a:hover {
+            text-decoration: none; color: black;
+         }
+         .b-r a {
+            text-decoration: underline; color: blue;
+         }
+         div, span {
+            vertical-align: top;
+         }
+         p {
+            margin: 0px;
+         }
+         h1 {
+            /*font-size: 14pt;*/
+            color: red;
+         }
+         #menu {
+            margin-bottom: 10px;
+         }
+         #menu ul {
+            margin-left: 0;
+            padding-left: 0;
+            display: inline;
+         }
+         #menu ul li {
+            margin-left: 0;
+            margin-bottom: 0;
+            padding: 2px 15px 5px;
+            border: 1px solid #000;
+            list-style: none;
+            display: inline;
+         }
+         #menu ul li.here {
+            border-bottom: 1px solid #ffc;
+            list-style: none;
+            display: inline;
+         }
+         .menu-tab {
+            background: white;
+         }
+         .menu-tab:hover {
+            background: grey;
+         }
+         .menu-tab-selected {
+            background: #aaaaaa;
+         }
+         #analysis-data ul {
+            margin-left: 15px;
+         }
+         #analyzed-files, #used-libraries, #analysis-error {
+           margin: 2px;
+           border: 1px black solid;
+           padding: 2px;
+           float: left;
+           overflow:auto;
+         }
+         #analyzed-files {
+           width: 25%;
+         }
+         #used-libraries {
+           width: 25%;
+         }
+         #analysis-error {
+           width: 40%;
+         }
+         div.summary {
+            width:100%;
+            text-align:left;
+         }
+         .summary table {
+            border:1px solid black;
+         }
+         .summary th {
+            background: #aaaaaa;
+            color: white;
+         }
+         .summary th, .summary td {
+            padding: 2px 4px 2px 4px;
+         }
+         .summary-name {
+            background: #eeeeee;
+            text-align:left;
+         }
+         .summary-size {
+            background: #eeeeee;
+            text-align:center;
+         }
+         .summary-ratio {
+            background: #eeeeee;
+            text-align:center;
+         }
+         .summary-priority-all {
+            background: #dddddd;
+            text-align:center;
+         }
+         .summary-priority-1 {
+            background: red;
+            text-align:center;
+         }
+         .summary-priority-2 {
+            background: orange;
+            text-align:center;
+         }
+         .summary-priority-3 {
+            background: green;
+            text-align:center;
+         }
+         .summary-priority-4 {
+            background: blue;
+            text-align:center;
+         }
+         .ob {
+            border: 1px solid black;
+            margin: 10px;
+         }
+         .ob-t {
+            border-bottom: 1px solid #000000; font-size: 12pt; font-weight: bold;
+            background: #cccccc; margin: 0; padding: 0 5px 0 5px;
+         }
+         .t-h {
+            font-weight: normal;
+         }
+         .ib-1, .ib-2 {
+            margin: 0 0 0 10px;
+         }
+         .ib-1-t, .ib-2-t {
+            border-bottom: 1px solid #000000; border-left: 1px solid #000000;
+            margin: 0; padding: 0 5px 0 5px;
+            font-size: 12pt; font-weight: bold; background: #cccccc;
+         }
+         .bb {
+            border-bottom: 1px solid #000000; border-left: 1px solid #000000;
+         }
+         .b-1 {
+            background: red; height: 0.5em; width: 1em;
+            margin-right: 0.5em;
+         }
+         .b-2 {
+            background: orange; height: 0.5em; width: 1em;
+            margin-right: 0.5em;
+         }
+         .b-3 {
+            background: green; height: 0.5em; width: 1em;
+            margin-right: 0.5em;
+         }
+         .b-4 {
+            background: blue; height: 0.5em; width: 1em;
+            margin-right: 0.5em;
+         }
+         .b-t {
+         }
+         .b-r {
+            font-size: 10pt; font-weight: bold; padding: 0 0 0 60px;
+         }
+         .b-d {
+            font-weight: normal; background: #eeeee0;
+            padding: 0 5px 0 5px; margin: 0px;
+         }
+         .bug-placeholder {
+            top:140px;
+            border:1px solid black;
+            display:none;
+         }
+         .tip {
+            border:solid 1px #666666;
+            width:600px;
+            padding:3px;
+            position:absolute;
+            z-index:100;
+            visibility:hidden;
+            color:#333333;
+            top:20px;
+            left:90px;
+            background-color:#ffffcc;
+            layer-background-color:#ffffcc;
+         }
+
+
+      </style>
+</head>
+<body>
+<div id="content">
+<h1>
+         FindBugs (3.0.1)
+         Analysis for
+         </h1>
+<div id="menu">
+<ul>
+<li id="bug-summary-tab" class="menu-tab-selected" onclick="showmenu('bug-summary');return false;">
+<a href="" onclick="return false;">Bug Summary</a>
+</li>
+<li id="analysis-data-tab" class="menu-tab" onclick="showmenu('analysis-data');return false;">
+<a href="" onclick="return false;">Analysis Information</a>
+</li>
+<li id="list-by-category-tab" class="menu-tab" onclick="showmenu('list-by-category');return false;">
+<a href="" onclick="return false;">List bugs by bug category</a>
+</li>
+<li id="list-by-package-tab" class="menu-tab" onclick="showmenu('list-by-package');return false;">
+<a href="" onclick="return false;">List bugs by package</a>
+</li>
+</ul>
+</div>
+<div class="summary" id="bug-summary">
+<h2>FindBugs Analysis generated at: Mon, 4 Sep 2017 22:21:13 +0530</h2>
+<table>
+<tr>
+<th>Package</th>
+<th>Code Size</th>
+<th>Bugs</th>
+<th>High Prio Bugs</th>
+<th>Medium Prio Bugs</th>
+<th>Low Prio Bugs</th>
+<th>Exp. Bugs</th>
+<th>Ratio</th>
+</tr>
+<tr>
+<td class="summary-name">
+            Overall
+            (4 packages),
+            (19 classes)
+         </td>
+<td class="summary-size">234</td>
+<td class="summary-priority-all">19</td>
+<td class="summary-priority-1">7</td>
+<td class="summary-priority-2">12</td>
+<td class="summary-priority-3"/>
+<td class="summary-priority-4"/>
+<td class="summary-ratio"/>
+</tr>
+<tr>
+<td class="summary-name">app</td>
+<td class="summary-size">83</td>
+<td class="summary-priority-all">9</td>
+<td class="summary-priority-1">2</td>
+<td class="summary-priority-2">7</td>
+<td class="summary-priority-3"/>
+<td class="summary-priority-4"/>
+<td class="summary-ratio"/>
+</tr>
+<tr>
+<td class="summary-name">com.bank</td>
+<td class="summary-size">59</td>
+<td class="summary-priority-all">5</td>
+<td class="summary-priority-1">3</td>
+<td class="summary-priority-2">2</td>
+<td class="summary-priority-3"/>
+<td class="summary-priority-4"/>
+<td class="summary-ratio"/>
+</tr>
+<tr>
+<td class="summary-name">com.company</td>
+<td class="summary-size">14</td>
+<td class="summary-priority-all">4</td>
+<td class="summary-priority-1">2</td>
+<td class="summary-priority-2">2</td>
+<td class="summary-priority-3"/>
+<td class="summary-priority-4"/>
+<td class="summary-ratio"/>
+</tr>
+<tr>
+<td class="summary-name">test.com.bank</td>
+<td class="summary-size">78</td>
+<td class="summary-priority-all">1</td>
+<td class="summary-priority-1"/>
+<td class="summary-priority-2">1</td>
+<td class="summary-priority-3"/>
+<td class="summary-priority-4"/>
+<td class="summary-ratio"/>
+</tr>
+</table>
+</div>
+<div id="analysis-data" style="display:none;">
+<div id="analyzed-files">
+<h3>Analyzed Files:</h3>
+<ul>
+<li>D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\bin</li>
+</ul>
+</div>
+<div id="used-libraries">
+<h3>Used Libraries:</h3>
+<ul>
+<li>D:\Jenkins-Advanced-Training\Projects\Jenkins-CI-Projects\MyAccounts\lib\junit-4.2.jar</li>
+</ul>
+</div>
+<div id="analysis-error">
+<h3>Analysis Errors:</h3>
+<ul>
+<li>None</li>
+</ul>
+</div>
+</div>
+<div id="list-by-category" class="data-box" style="display:none;">
+<span class="b-1">&nbsp;&nbsp;</span> High Prio
+   <span class="b-2">&nbsp;&nbsp;</span> Medium Prio
+   <span class="b-3">&nbsp;&nbsp;</span> Low Prio
+   <span class="b-4">&nbsp;&nbsp;</span> Exp.
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('category-BAD_PRACTICE');return false;">Bad practice
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-BAD_PRACTICE">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-BAD_PRACTICE-and-code-Nm');return false;">Nm: Confusing method name
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-BAD_PRACTICE-and-code-Nm">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-BAD_PRACTICE-and-code-Nm-and-bug-NM_METHOD_NAMING_CONVENTION');return false;" onmouseout="popUp(event,'tip-NM_METHOD_NAMING_CONVENTION');" onmouseover="popUp(event,'tip-NM_METHOD_NAMING_CONVENTION');">Method names should start with a lower case letter&nbsp;&nbsp;
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-BAD_PRACTICE-and-code-Nm-and-bug-NM_METHOD_NAMING_CONVENTION">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-901f709ec55888b4605e88ad9bf16040-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">Nm: </span>In class test.com.bank.App1Test</a>
+<div style="display:none;" id="b-uid-901f709ec55888b4605e88ad9bf16040-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('category-CORRECTNESS');return false;">Correctness
+            (8:
+            <span class="t-h">5/3/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-IP');return false;">IP: Ignored parameter
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-IP">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-IP-and-bug-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN');return false;" onmouseout="popUp(event,'tip-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN');" onmouseover="popUp(event,'tip-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN');">A parameter is dead upon entry to a method but overwritten&nbsp;&nbsp;
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-IP-and-bug-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-f9b1a93b92827af40f33327eaf493cbb-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">IP: </span>In class app.App</a>
+<div style="display:none;" id="b-uid-f9b1a93b92827af40f33327eaf493cbb-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-6268a532452f4284dbdd83a4e4d78a2-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">IP: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-6268a532452f4284dbdd83a4e4d78a2-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-NP');return false;">NP: Null pointer dereference
+            (1:
+            <span class="t-h">1/0/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-NP">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-NP-and-bug-NP_ALWAYS_NULL');return false;" onmouseout="popUp(event,'tip-NP_ALWAYS_NULL');" onmouseover="popUp(event,'tip-NP_ALWAYS_NULL');">Null pointer dereference&nbsp;&nbsp;
+            (1:
+            <span class="t-h">1/0/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-NP-and-bug-NP_ALWAYS_NULL">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-38a83f0505e15c033d4efb23ac2236e4-0','c');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">NP: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-38a83f0505e15c033d4efb23ac2236e4-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-RV');return false;">RV: Bad use of return value from method
+            (4:
+            <span class="t-h">4/0/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-RV">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-RV-and-bug-RV_RETURN_VALUE_IGNORED');return false;" onmouseout="popUp(event,'tip-RV_RETURN_VALUE_IGNORED');" onmouseover="popUp(event,'tip-RV_RETURN_VALUE_IGNORED');">Method ignores return value&nbsp;&nbsp;
+            (4:
+            <span class="t-h">4/0/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-RV-and-bug-RV_RETURN_VALUE_IGNORED">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-390777734a4f39c6cb55a598c4485dba-0','c');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-390777734a4f39c6cb55a598c4485dba-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-74cfa977c38fdede6113c7bb4e14c0d8-0','c');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-74cfa977c38fdede6113c7bb4e14c0d8-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-4715ffa3e8eedb46ca840e27883ab02-0','c');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-4715ffa3e8eedb46ca840e27883ab02-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-7f047dd43f77ac0f4bc0165a87be8f29-0','c');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-7f047dd43f77ac0f4bc0165a87be8f29-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-UR');return false;">UR: Uninitialized read of field in constructor
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-UR">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-CORRECTNESS-and-code-UR-and-bug-UR_UNINIT_READ');return false;" onmouseout="popUp(event,'tip-UR_UNINIT_READ');" onmouseover="popUp(event,'tip-UR_UNINIT_READ');">Uninitialized read of field in constructor&nbsp;&nbsp;
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-CORRECTNESS-and-code-UR-and-bug-UR_UNINIT_READ">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-dad363f7ffb8919c21d45f93a19892bc-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UR: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-dad363f7ffb8919c21d45f93a19892bc-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('category-PERFORMANCE');return false;">Performance
+            (7:
+            <span class="t-h">0/7/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-Dm');return false;">Dm: Dubious method used
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-Dm">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-Dm-and-bug-DM_STRING_CTOR');return false;" onmouseout="popUp(event,'tip-DM_STRING_CTOR');" onmouseover="popUp(event,'tip-DM_STRING_CTOR');">Method invokes inefficient new String(String) constructor&nbsp;&nbsp;
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-Dm-and-bug-DM_STRING_CTOR">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-895e8a5a65f927901b073053a1d585ea-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">Dm: </span>In class app.App</a>
+<div style="display:none;" id="b-uid-895e8a5a65f927901b073053a1d585ea-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-66e5f42d745e6050c57533769b7d2689-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">Dm: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-66e5f42d745e6050c57533769b7d2689-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-SS');return false;">SS: Unread field should be static
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-SS">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-SS-and-bug-SS_SHOULD_BE_STATIC');return false;" onmouseout="popUp(event,'tip-SS_SHOULD_BE_STATIC');" onmouseover="popUp(event,'tip-SS_SHOULD_BE_STATIC');">Unread field: should this field be static?&nbsp;&nbsp;
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-SS-and-bug-SS_SHOULD_BE_STATIC">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-3467eeb068f0be828a84258ef5d77915-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">SS: </span>In class app.MyLogSink</a>
+<div style="display:none;" id="b-uid-3467eeb068f0be828a84258ef5d77915-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-UrF');return false;">UrF: Unread field
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-UrF">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-UrF-and-bug-URF_UNREAD_FIELD');return false;" onmouseout="popUp(event,'tip-URF_UNREAD_FIELD');" onmouseover="popUp(event,'tip-URF_UNREAD_FIELD');">Unread field&nbsp;&nbsp;
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-UrF-and-bug-URF_UNREAD_FIELD">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-31824ca9105ea00d7e4ac939631451d4-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UrF: </span>In class app.App2</a>
+<div style="display:none;" id="b-uid-31824ca9105ea00d7e4ac939631451d4-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-56652d54842f1df6eb58847c52dbf7e8-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UrF: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-56652d54842f1df6eb58847c52dbf7e8-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-UuF');return false;">UuF: Unused field
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-UuF">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-PERFORMANCE-and-code-UuF-and-bug-UUF_UNUSED_FIELD');return false;" onmouseout="popUp(event,'tip-UUF_UNUSED_FIELD');" onmouseover="popUp(event,'tip-UUF_UNUSED_FIELD');">Unused field&nbsp;&nbsp;
+            (2:
+            <span class="t-h">0/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-PERFORMANCE-and-code-UuF-and-bug-UUF_UNUSED_FIELD">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-71cc185074376825232bf442ba252368-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UuF: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-71cc185074376825232bf442ba252368-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-73d29e202ca7e5622adacb6ff281de5c-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UuF: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-73d29e202ca7e5622adacb6ff281de5c-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('category-STYLE');return false;">Dodgy code
+            (3:
+            <span class="t-h">2/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-STYLE">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-STYLE-and-code-DLS');return false;">DLS: Dead local store
+            (2:
+            <span class="t-h">2/0/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-STYLE-and-code-DLS">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-STYLE-and-code-DLS-and-bug-DLS_DEAD_LOCAL_STORE');return false;" onmouseout="popUp(event,'tip-DLS_DEAD_LOCAL_STORE');" onmouseover="popUp(event,'tip-DLS_DEAD_LOCAL_STORE');">Dead store to local variable&nbsp;&nbsp;
+            (2:
+            <span class="t-h">2/0/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-STYLE-and-code-DLS-and-bug-DLS_DEAD_LOCAL_STORE">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-5bfcfd30987178d12e7f78d00593ab2c-0','c');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">DLS: </span>In class app.App</a>
+<div style="display:none;" id="b-uid-5bfcfd30987178d12e7f78d00593ab2c-0-ph-c">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-a61e7424ee8a89968b9aa945254de7e5-0','c');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">DLS: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-a61e7424ee8a89968b9aa945254de7e5-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('category-STYLE-and-code-RV');return false;">RV: Bad use of return value from method
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-STYLE-and-code-RV">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('category-STYLE-and-code-RV-and-bug-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT');return false;" onmouseout="popUp(event,'tip-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT');" onmouseover="popUp(event,'tip-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT');">Return value of method without side effect is ignored&nbsp;&nbsp;
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="category-STYLE-and-code-RV-and-bug-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-d772a776df04fed05197af69eb313286-0','c');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-d772a776df04fed05197af69eb313286-0-ph-c">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="list-by-package" class="data-box" style="display:none;">
+<span class="b-1">&nbsp;&nbsp;</span> High Prio
+   <span class="b-2">&nbsp;&nbsp;</span> Medium Prio
+   <span class="b-3">&nbsp;&nbsp;</span> Low Prio
+   <span class="b-4">&nbsp;&nbsp;</span> Exp.
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('package-app');return false;">app
+            (9:
+            <span class="t-h">2/7/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-app">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('package-app-and-class-app.App');return false;">app.App  (3:
+            <span class="t-h">1/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.App">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.App-and-type-DLS_DEAD_LOCAL_STORE');return false;" onmouseout="popUp(event,'tip-DLS_DEAD_LOCAL_STORE')" onmouseover="popUp(event,'tip-DLS_DEAD_LOCAL_STORE')">Dead store to local variable&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.App-and-type-DLS_DEAD_LOCAL_STORE">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-5bfcfd30987178d12e7f78d00593ab2c-0','p');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">DLS: </span>In class app.App</a>
+<div style="display:none;" id="b-uid-5bfcfd30987178d12e7f78d00593ab2c-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.App-and-type-DM_STRING_CTOR');return false;" onmouseout="popUp(event,'tip-DM_STRING_CTOR')" onmouseover="popUp(event,'tip-DM_STRING_CTOR')">Method invokes inefficient new String(String) constructor&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.App-and-type-DM_STRING_CTOR">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-895e8a5a65f927901b073053a1d585ea-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">Dm: </span>In class app.App</a>
+<div style="display:none;" id="b-uid-895e8a5a65f927901b073053a1d585ea-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.App-and-type-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN');return false;" onmouseout="popUp(event,'tip-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN')" onmouseover="popUp(event,'tip-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN')">A parameter is dead upon entry to a method but overwritten&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.App-and-type-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-f9b1a93b92827af40f33327eaf493cbb-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">IP: </span>In class app.App</a>
+<div style="display:none;" id="b-uid-f9b1a93b92827af40f33327eaf493cbb-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('package-app-and-class-app.App2');return false;">app.App2  (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.App2">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.App2-and-type-URF_UNREAD_FIELD');return false;" onmouseout="popUp(event,'tip-URF_UNREAD_FIELD')" onmouseover="popUp(event,'tip-URF_UNREAD_FIELD')">Unread field&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.App2-and-type-URF_UNREAD_FIELD">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-31824ca9105ea00d7e4ac939631451d4-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UrF: </span>In class app.App2</a>
+<div style="display:none;" id="b-uid-31824ca9105ea00d7e4ac939631451d4-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('package-app-and-class-app.MyLogSink');return false;">app.MyLogSink  (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.MyLogSink">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.MyLogSink-and-type-SS_SHOULD_BE_STATIC');return false;" onmouseout="popUp(event,'tip-SS_SHOULD_BE_STATIC')" onmouseover="popUp(event,'tip-SS_SHOULD_BE_STATIC')">Unread field: should this field be static?&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.MyLogSink-and-type-SS_SHOULD_BE_STATIC">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-3467eeb068f0be828a84258ef5d77915-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">SS: </span>In class app.MyLogSink</a>
+<div style="display:none;" id="b-uid-3467eeb068f0be828a84258ef5d77915-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('package-app-and-class-app.UserInfo');return false;">app.UserInfo  (4:
+            <span class="t-h">1/3/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.UserInfo">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.UserInfo-and-type-DLS_DEAD_LOCAL_STORE');return false;" onmouseout="popUp(event,'tip-DLS_DEAD_LOCAL_STORE')" onmouseover="popUp(event,'tip-DLS_DEAD_LOCAL_STORE')">Dead store to local variable&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.UserInfo-and-type-DLS_DEAD_LOCAL_STORE">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-a61e7424ee8a89968b9aa945254de7e5-0','p');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">DLS: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-a61e7424ee8a89968b9aa945254de7e5-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.UserInfo-and-type-DM_STRING_CTOR');return false;" onmouseout="popUp(event,'tip-DM_STRING_CTOR')" onmouseover="popUp(event,'tip-DM_STRING_CTOR')">Method invokes inefficient new String(String) constructor&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.UserInfo-and-type-DM_STRING_CTOR">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-66e5f42d745e6050c57533769b7d2689-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">Dm: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-66e5f42d745e6050c57533769b7d2689-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.UserInfo-and-type-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN');return false;" onmouseout="popUp(event,'tip-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN')" onmouseover="popUp(event,'tip-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN')">A parameter is dead upon entry to a method but overwritten&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.UserInfo-and-type-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-6268a532452f4284dbdd83a4e4d78a2-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">IP: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-6268a532452f4284dbdd83a4e4d78a2-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-app-and-class-app.UserInfo-and-type-URF_UNREAD_FIELD');return false;" onmouseout="popUp(event,'tip-URF_UNREAD_FIELD')" onmouseover="popUp(event,'tip-URF_UNREAD_FIELD')">Unread field&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-app-and-class-app.UserInfo-and-type-URF_UNREAD_FIELD">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-56652d54842f1df6eb58847c52dbf7e8-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UrF: </span>In class app.UserInfo</a>
+<div style="display:none;" id="b-uid-56652d54842f1df6eb58847c52dbf7e8-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('package-com.bank');return false;">com.bank
+            (5:
+            <span class="t-h">3/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-com.bank">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('package-com.bank-and-class-com.bank.Account');return false;">com.bank.Account  (5:
+            <span class="t-h">3/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-com.bank-and-class-com.bank.Account">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-com.bank-and-class-com.bank.Account-and-type-NP_ALWAYS_NULL');return false;" onmouseout="popUp(event,'tip-NP_ALWAYS_NULL')" onmouseover="popUp(event,'tip-NP_ALWAYS_NULL')">Null pointer dereference&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-com.bank-and-class-com.bank.Account-and-type-NP_ALWAYS_NULL">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-38a83f0505e15c033d4efb23ac2236e4-0','p');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">NP: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-38a83f0505e15c033d4efb23ac2236e4-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-com.bank-and-class-com.bank.Account-and-type-RV_RETURN_VALUE_IGNORED');return false;" onmouseout="popUp(event,'tip-RV_RETURN_VALUE_IGNORED')" onmouseover="popUp(event,'tip-RV_RETURN_VALUE_IGNORED')">Method ignores return value&nbsp;&nbsp;
+            (2)
+         </a>
+</div>
+<div style="display:none;" id="package-com.bank-and-class-com.bank.Account-and-type-RV_RETURN_VALUE_IGNORED">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-390777734a4f39c6cb55a598c4485dba-0','p');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-390777734a4f39c6cb55a598c4485dba-0-ph-p">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-74cfa977c38fdede6113c7bb4e14c0d8-0','p');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-74cfa977c38fdede6113c7bb4e14c0d8-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-com.bank-and-class-com.bank.Account-and-type-UR_UNINIT_READ');return false;" onmouseout="popUp(event,'tip-UR_UNINIT_READ')" onmouseover="popUp(event,'tip-UR_UNINIT_READ')">Uninitialized read of field in constructor&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-com.bank-and-class-com.bank.Account-and-type-UR_UNINIT_READ">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-dad363f7ffb8919c21d45f93a19892bc-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UR: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-dad363f7ffb8919c21d45f93a19892bc-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-com.bank-and-class-com.bank.Account-and-type-UUF_UNUSED_FIELD');return false;" onmouseout="popUp(event,'tip-UUF_UNUSED_FIELD')" onmouseover="popUp(event,'tip-UUF_UNUSED_FIELD')">Unused field&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-com.bank-and-class-com.bank.Account-and-type-UUF_UNUSED_FIELD">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-71cc185074376825232bf442ba252368-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UuF: </span>In class com.bank.Account</a>
+<div style="display:none;" id="b-uid-71cc185074376825232bf442ba252368-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('package-com.company');return false;">com.company
+            (4:
+            <span class="t-h">2/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-com.company">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('package-com.company-and-class-com.company.HelloWorld');return false;">com.company.HelloWorld  (4:
+            <span class="t-h">2/2/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-com.company-and-class-com.company.HelloWorld">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-com.company-and-class-com.company.HelloWorld-and-type-RV_RETURN_VALUE_IGNORED');return false;" onmouseout="popUp(event,'tip-RV_RETURN_VALUE_IGNORED')" onmouseover="popUp(event,'tip-RV_RETURN_VALUE_IGNORED')">Method ignores return value&nbsp;&nbsp;
+            (2)
+         </a>
+</div>
+<div style="display:none;" id="package-com.company-and-class-com.company.HelloWorld-and-type-RV_RETURN_VALUE_IGNORED">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-4715ffa3e8eedb46ca840e27883ab02-0','p');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-4715ffa3e8eedb46ca840e27883ab02-0-ph-p">
+         loading...
+      </div>
+</div>
+<div class="bb">
+<a href="" onclick="showbug('b-uid-7f047dd43f77ac0f4bc0165a87be8f29-0','p');return false;">
+<span class="b-1">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-7f047dd43f77ac0f4bc0165a87be8f29-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-com.company-and-class-com.company.HelloWorld-and-type-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT');return false;" onmouseout="popUp(event,'tip-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT')" onmouseover="popUp(event,'tip-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT')">Return value of method without side effect is ignored&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-com.company-and-class-com.company.HelloWorld-and-type-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-d772a776df04fed05197af69eb313286-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">RV: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-d772a776df04fed05197af69eb313286-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-com.company-and-class-com.company.HelloWorld-and-type-UUF_UNUSED_FIELD');return false;" onmouseout="popUp(event,'tip-UUF_UNUSED_FIELD')" onmouseover="popUp(event,'tip-UUF_UNUSED_FIELD')">Unused field&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-com.company-and-class-com.company.HelloWorld-and-type-UUF_UNUSED_FIELD">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-73d29e202ca7e5622adacb6ff281de5c-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">UuF: </span>In class com.company.HelloWorld</a>
+<div style="display:none;" id="b-uid-73d29e202ca7e5622adacb6ff281de5c-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ob">
+<div class="ob-t">
+<a href="" onclick="toggle('package-test.com.bank');return false;">test.com.bank
+            (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-test.com.bank">
+<div class="ib-1">
+<div class="ib-1-t">
+<a href="" onclick="toggle('package-test.com.bank-and-class-test.com.bank.App1Test');return false;">test.com.bank.App1Test  (1:
+            <span class="t-h">0/1/0/0</span>)
+         </a>
+</div>
+<div style="display:none;" id="package-test.com.bank-and-class-test.com.bank.App1Test">
+<div class="ib-2">
+<div class="ib-2-t">
+<a href="" onclick="toggle('package-test.com.bank-and-class-test.com.bank.App1Test-and-type-NM_METHOD_NAMING_CONVENTION');return false;" onmouseout="popUp(event,'tip-NM_METHOD_NAMING_CONVENTION')" onmouseover="popUp(event,'tip-NM_METHOD_NAMING_CONVENTION')">Method names should start with a lower case letter&nbsp;&nbsp;
+            (1)
+         </a>
+</div>
+<div style="display:none;" id="package-test.com.bank-and-class-test.com.bank.App1Test-and-type-NM_METHOD_NAMING_CONVENTION">
+<div class="bb">
+<a href="" onclick="showbug('b-uid-901f709ec55888b4605e88ad9bf16040-0','p');return false;">
+<span class="b-2">&nbsp;&nbsp;</span>
+<span class="b-t">Nm: </span>In class test.com.bank.App1Test</a>
+<div style="display:none;" id="b-uid-901f709ec55888b4605e88ad9bf16040-0-ph-p">
+         loading...
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tip-DLS_DEAD_LOCAL_STORE" class="tip">
+<b>DLS / DLS_DEAD_LOCAL_STORE</b>
+<br/>
+
+<p>
+This instruction assigns a value to a local variable,
+but the value is not read or used in any subsequent instruction.
+Often, this indicates an error, because the value computed is never
+used.
+</p>
+<p>
+Note that Sun's javac compiler often generates dead stores for
+final local variables.  Because FindBugs is a bytecode-based tool,
+there is no easy way to eliminate these false positives.
+</p>
+
+    </div>
+<div id="tip-NP_ALWAYS_NULL" class="tip">
+<b>NP / NP_ALWAYS_NULL</b>
+<br/>
+
+<p> A null pointer is dereferenced here.&nbsp; This will lead to a
+<code>NullPointerException</code> when the code is executed.</p>
+
+    </div>
+<div id="tip-RV_RETURN_VALUE_IGNORED" class="tip">
+<b>RV / RV_RETURN_VALUE_IGNORED</b>
+<br/>
+
+   <p> The return value of this method should be checked. One common
+cause of this warning is to invoke a method on an immutable object,
+thinking that it updates the object. For example, in the following code
+fragment,</p>
+<blockquote>
+<pre>
+String dateString = getHeaderField(name);
+dateString.trim();
+</pre>
+</blockquote>
+<p>the programmer seems to be thinking that the trim() method will update
+the String referenced by dateString. But since Strings are immutable, the trim()
+function returns a new String value, which is being ignored here. The code
+should be corrected to: </p>
+<blockquote>
+<pre>
+String dateString = getHeaderField(name);
+dateString = dateString.trim();
+</pre>
+</blockquote>
+
+    </div>
+<div id="tip-RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" class="tip">
+<b>RV / RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT</b>
+<br/>
+
+<p>This code calls a method and ignores the return value. However our analysis shows that
+the method (including its implementations in subclasses if any) does not produce any effect 
+other than return value. Thus this call can be removed.
+</p>
+<p>We are trying to reduce the false positives as much as possible, but in some cases this warning might be wrong.
+Common false-positive cases include:</p>
+<p>- The method is designed to be overridden and produce a side effect in other projects which are out of the scope of the analysis.</p>
+<p>- The method is called to trigger the class loading which may have a side effect.</p>
+<p>- The method is called just to get some exception.</p>
+<p>If you feel that our assumption is incorrect, you can use a @CheckReturnValue annotation
+to instruct FindBugs that ignoring the return value of this method is acceptable.
+</p>
+
+    </div>
+<div id="tip-UUF_UNUSED_FIELD" class="tip">
+<b>UuF / UUF_UNUSED_FIELD</b>
+<br/>
+
+  <p> This field is never used.&nbsp; Consider removing it from the class.</p>
+
+    </div>
+<div id="tip-SS_SHOULD_BE_STATIC" class="tip">
+<b>SS / SS_SHOULD_BE_STATIC</b>
+<br/>
+
+  <p> This class contains an instance final field that
+   is initialized to a compile-time static value.
+   Consider making the field static.</p>
+
+    </div>
+<div id="tip-IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN" class="tip">
+<b>IP / IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN</b>
+<br/>
+
+<p>
+The initial value of this parameter is ignored, and the parameter
+is overwritten here. This often indicates a mistaken belief that
+the write to the parameter will be conveyed back to
+the caller.
+</p>
+
+    </div>
+<div id="tip-NM_METHOD_NAMING_CONVENTION" class="tip">
+<b>Nm / NM_METHOD_NAMING_CONVENTION</b>
+<br/>
+
+  <p>
+Methods should be verbs, in mixed case with the first letter lowercase, with the first letter of each internal word capitalized.
+</p>
+
+    </div>
+<div id="tip-URF_UNREAD_FIELD" class="tip">
+<b>UrF / URF_UNREAD_FIELD</b>
+<br/>
+
+  <p> This field is never read.&nbsp; Consider removing it from the class.</p>
+
+    </div>
+<div id="tip-DM_STRING_CTOR" class="tip">
+<b>Dm / DM_STRING_CTOR</b>
+<br/>
+
+  <p> Using the <code>java.lang.String(String)</code> constructor wastes memory
+  because the object so constructed will be functionally indistinguishable
+  from the <code>String</code> passed as a parameter.&nbsp; Just use the
+  argument <code>String</code> directly.</p>
+
+    </div>
+<div id="tip-UR_UNINIT_READ" class="tip">
+<b>UR / UR_UNINIT_READ</b>
+<br/>
+
+  <p> This constructor reads a field which has not yet been assigned a value.&nbsp;
+  This is often caused when the programmer mistakenly uses the field instead
+  of one of the constructor's parameters.</p>
+
+    </div>
+<div style="display:none;" id="b-uid-5bfcfd30987178d12e7f78d00593ab2c-0">
+<div class="b-r">In class app.App</div>
+<div class="b-r">In method app.App.runMe(String)</div>
+<div class="b-r">Local variable stored in JVM register 1</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Dead store to $L1 in app.App.runMe(String)</div>
+</div>
+<div style="display:none;" id="b-uid-895e8a5a65f927901b073053a1d585ea-0">
+<div class="b-r">In class app.App</div>
+<div class="b-r">In method app.App.runMe(String)</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">app.App.runMe(String) invokes inefficient new String(String) constructor</div>
+</div>
+<div style="display:none;" id="b-uid-f9b1a93b92827af40f33327eaf493cbb-0">
+<div class="b-r">In class app.App</div>
+<div class="b-r">In method app.App.runMe(String)</div>
+<div class="b-r">Local variable stored in JVM register 1</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">The parameter $L1 to app.App.runMe(String) is dead upon entry but overwritten</div>
+</div>
+<div style="display:none;" id="b-uid-31824ca9105ea00d7e4ac939631451d4-0">
+<div class="b-r">In class app.App2</div>
+<div class="b-r">Field app.App2.unUsed</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Unread field: app.App2.unUsed</div>
+</div>
+<div style="display:none;" id="b-uid-3467eeb068f0be828a84258ef5d77915-0">
+<div class="b-r">In class app.MyLogSink</div>
+<div class="b-r">Field app.MyLogSink.data</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Unread field: app.MyLogSink.data; should this field be static?</div>
+</div>
+<div style="display:none;" id="b-uid-a61e7424ee8a89968b9aa945254de7e5-0">
+<div class="b-r">In class app.UserInfo</div>
+<div class="b-r">In method app.UserInfo.runMe(String)</div>
+<div class="b-r">Local variable stored in JVM register 1</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Dead store to $L1 in app.UserInfo.runMe(String)</div>
+</div>
+<div style="display:none;" id="b-uid-66e5f42d745e6050c57533769b7d2689-0">
+<div class="b-r">In class app.UserInfo</div>
+<div class="b-r">In method app.UserInfo.runMe(String)</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">app.UserInfo.runMe(String) invokes inefficient new String(String) constructor</div>
+</div>
+<div style="display:none;" id="b-uid-6268a532452f4284dbdd83a4e4d78a2-0">
+<div class="b-r">In class app.UserInfo</div>
+<div class="b-r">In method app.UserInfo.runMe(String)</div>
+<div class="b-r">Local variable stored in JVM register 1</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">The parameter $L1 to app.UserInfo.runMe(String) is dead upon entry but overwritten</div>
+</div>
+<div style="display:none;" id="b-uid-56652d54842f1df6eb58847c52dbf7e8-0">
+<div class="b-r">In class app.UserInfo</div>
+<div class="b-r">Field app.UserInfo.unUsed</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Unread field: app.UserInfo.unUsed</div>
+</div>
+<div style="display:none;" id="b-uid-38a83f0505e15c033d4efb23ac2236e4-0">
+<div class="b-r">In class com.bank.Account</div>
+<div class="b-r">In method com.bank.Account.main(String[])</div>
+<div class="b-r">Value loaded from ?</div>
+<div class="b-r">Dereferenced at &lt;Unknown&gt;</div>
+<div class="b-d">Null pointer dereference of ? in com.bank.Account.main(String[])</div>
+</div>
+<div style="display:none;" id="b-uid-390777734a4f39c6cb55a598c4485dba-0">
+<div class="b-r">In class com.bank.Account</div>
+<div class="b-r">In method new com.bank.Account(String)</div>
+<div class="b-r">Called method String.concat(String)</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Return value of String.concat(String) ignored in new com.bank.Account(String)</div>
+</div>
+<div style="display:none;" id="b-uid-74cfa977c38fdede6113c7bb4e14c0d8-0">
+<div class="b-r">In class com.bank.Account</div>
+<div class="b-r">In method com.bank.Account.replaceName(String)</div>
+<div class="b-r">Called method String.replace(CharSequence, CharSequence)</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Return value of String.replace(CharSequence, CharSequence) ignored in com.bank.Account.replaceName(String)</div>
+</div>
+<div style="display:none;" id="b-uid-dad363f7ffb8919c21d45f93a19892bc-0">
+<div class="b-r">In class com.bank.Account</div>
+<div class="b-r">In method new com.bank.Account(String)</div>
+<div class="b-r">Field com.bank.Account.name</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Uninitialized read of name in new com.bank.Account(String)</div>
+</div>
+<div style="display:none;" id="b-uid-71cc185074376825232bf442ba252368-0">
+<div class="b-r">In class com.bank.Account</div>
+<div class="b-r">Field com.bank.Account.branchName</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Unused field: com.bank.Account.branchName</div>
+</div>
+<div style="display:none;" id="b-uid-4715ffa3e8eedb46ca840e27883ab02-0">
+<div class="b-r">In class com.company.HelloWorld</div>
+<div class="b-r">In method com.company.HelloWorld.getSearchString(String)</div>
+<div class="b-r">Called method String.substring(int)</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Return value of String.substring(int) ignored in com.company.HelloWorld.getSearchString(String)</div>
+</div>
+<div style="display:none;" id="b-uid-7f047dd43f77ac0f4bc0165a87be8f29-0">
+<div class="b-r">In class com.company.HelloWorld</div>
+<div class="b-r">In method com.company.HelloWorld.testNewCode()</div>
+<div class="b-r">Called method String.substring(int)</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Return value of String.substring(int) ignored in com.company.HelloWorld.testNewCode()</div>
+</div>
+<div style="display:none;" id="b-uid-d772a776df04fed05197af69eb313286-0">
+<div class="b-r">In class com.company.HelloWorld</div>
+<div class="b-r">In method com.company.HelloWorld.main(String[])</div>
+<div class="b-r">Called method com.company.HelloWorld.sayHello()</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Return value of sayHello() ignored, but method has no side effect</div>
+</div>
+<div style="display:none;" id="b-uid-73d29e202ca7e5622adacb6ff281de5c-0">
+<div class="b-r">In class com.company.HelloWorld</div>
+<div class="b-r">Field com.company.HelloWorld.num</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">Unused field: com.company.HelloWorld.num</div>
+</div>
+<div style="display:none;" id="b-uid-901f709ec55888b4605e88ad9bf16040-0">
+<div class="b-r">In class test.com.bank.App1Test</div>
+<div class="b-r">In method test.com.bank.App1Test.TestappCheck()</div>
+<div class="b-r">In &lt;Unknown&gt;</div>
+<div class="b-d">The method name test.com.bank.App1Test.TestappCheck() doesn't start with a lower case letter</div>
+</div>
+</div>
+<div id="fixedbox">
+<div id="bug-placeholder"/>
+</div>
+</body>
+</html>
